@@ -12,12 +12,13 @@ def home():
 @app.route("/doctor_login", methods=["GET","POST"])
 def doctorLogin():
 	if request.method =="POST":
-		doc = json.load(request.data)
-		result = connection.execute("Select password from doctor where id="+str(doc.id)+";")
+		doc = request.json
+		print request.json
+		result = connection.execute("Select password from doctor where id="+str(doc["id"])+";")
 		for row in result:
 			password = row[0]
 		
-		if password == doc.password:
+		if password == doc["password"]:
 			return "{'result':'login success'}"
 		else:
 			return "{'result':'invalid password'}"
