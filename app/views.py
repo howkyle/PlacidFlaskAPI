@@ -11,7 +11,7 @@ def home():
 
 @app.route("/doctor_login", methods=["GET","POST"])
 def doctorLogin():
-	if request.method =="GET":
+	if request.method =="POST":
 		doc = json.load(request.data)
 		result = connection.execute("Select password from doctor where id="+str(doc.id)+";")
 		for row in result:
